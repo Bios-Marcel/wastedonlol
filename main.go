@@ -40,20 +40,17 @@ var (
 	verbose      bool
 )
 
-func main() {
-	serverFlag := flag.String("server", "euw1", "specifies which server region should be queried")
-	summonerNameFlag := flag.String("summonername", "", "specifies the summoner which to query for")
-	apiKeyFlag := flag.String("apikey", "", "specifies the api key")
-	verboseFlag := flag.Bool("verbose", false, "specifies whether additional information should be given out.")
-
-	log.Printf("Querying summoner '%s' in server region '%s'\n", summonerName, server)
+func init() {
+	flag.StringVar(&server, "server", "euw1", "specifies which server region should be queried")
+	flag.StringVar(&summonerName, "summonername", "", "specifies the summoner which to query for")
+	flag.StringVar(&apiKey, "apikey", "", "specifies the api key")
+	flag.BoolVar(&verbose, "verbose", false, "specifies whether additional information should be given out.")
 
 	flag.Parse()
+}
 
-	server = *serverFlag
-	summonerName := *summonerNameFlag
-	apiKey = *apiKeyFlag
-	verbose = *verboseFlag
+func main() {
+	log.Printf("Querying summoner '%s' in server region '%s'\n", summonerName, server)
 
 	if apiKey == "" {
 		log.Fatalln("Please supply an API key by setting the parameter 'apikey'.")
