@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -9,8 +8,6 @@ import (
 	"log"
 	"net/http"
 	"time"
-
-	"golang.org/x/time/rate"
 )
 
 type Summoner struct {
@@ -30,9 +27,8 @@ type Match struct {
 }
 
 var (
-	ctx                = context.Background()
-	secondRateLimit    = rate.NewLimiter(rate.Every(1*time.Second), 19)
-	twoMinuteRateLimit = rate.NewLimiter(rate.Every(2*time.Minute), 99)
+	secondRateLimit    = NewLimiter(19, 1*time.Second)
+	twoMinuteRateLimit = NewLimiter(99, 2*time.Minute)
 
 	server       string
 	apiKey       string
@@ -87,8 +83,8 @@ func main() {
 }
 
 func ratelimitCheck() {
-	secondRateLimit.Wait(ctx)
-	twoMinuteRateLimit.Wait(ctx)
+	secondRateLimit.Wait()
+	twoMinuteRateLimit.Wait()
 }
 
 func sumDurationAsHours(matches []*Match) (uint64, error) {
