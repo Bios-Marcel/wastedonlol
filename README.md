@@ -37,4 +37,5 @@ quite a while to retrieve all your information, due to the fact that the LoL
 API has quite the strict rate limiting.
 
 > 20 requests per second
+>
 > 100 requests per 2 minutes
