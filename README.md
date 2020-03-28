@@ -28,7 +28,7 @@ Here's how to use it:
   * la2
 3. Launch the tool:
 ```shell
-go run main.go --server="euw1" --apikey="YOUR_KEY" --summonername="YOUR_SUMMONER_NAME"
+go run . --server="euw1" --apikey="YOUR_KEY" --summonername="YOUR_SUMMONER_NAME"
 ```
 
 Optionally you can set the flag `verbose` to true, in order to get additional
